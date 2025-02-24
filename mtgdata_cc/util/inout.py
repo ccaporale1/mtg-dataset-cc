@@ -45,7 +45,7 @@ def direct_download(url, path):
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
         with open(path_temp, 'wb') as f:
-            pbar = tqdm(unit="B", total=int(r.headers['Content-Length']), unit_scale=True, unit_divisor=1024, desc=f'Downloading: {path}')
+            pbar = tqdm(unit="B", total=int(r.headers['size']), unit_scale=True, unit_divisor=1024, desc=f'Downloading: {path}')
             for chunk in r.iter_content(chunk_size=8192):
                 if chunk:
                     pbar.update(len(chunk))
