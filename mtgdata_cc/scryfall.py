@@ -102,7 +102,8 @@ class ScryfallAPI(object):
     @classmethod
     def api_download(cls, endpoint):
         logger.info(f'[Scryfall]: {endpoint}')
-        return get_json(os.path.join(f'https://api.scryfall.com', endpoint))['data']
+        url = f'https://api.scryfall.com/{endpoint}'
+        return get_json(url)['data']
 
     @classmethod
     def get_bulk_info(cls, data_root=None, force_update=False):
