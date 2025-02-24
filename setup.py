@@ -44,9 +44,9 @@ with open('requirements.txt', 'r') as f:
 
 
 setuptools.setup(
-    name="mtgdata",
-    author="Nathan Juraj Michlo",
-    author_email="NathanJMichlo@gmail.com",
+    name="mtgdata-cc",
+    author="Christopher Caporale",
+    author_email="c.caporale@pm.me",
 
     version="0.1.0",
     python_requires=">=3.7",  # we make use of standard library features only in 3.8
@@ -54,7 +54,7 @@ setuptools.setup(
 
     install_requires=install_requires,
 
-    url="https://github.com/nmichlo/mtg-dataset",
+    url="https://github.com/ccaporale1/mtg-dataset-cc",
     description="MTG image dataset with automatic image scraping and conversion.",
     long_description=long_description,
     long_description_content_type="text/markdown",
