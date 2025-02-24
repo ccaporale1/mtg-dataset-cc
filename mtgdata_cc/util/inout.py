@@ -45,7 +45,6 @@ def direct_download(url, path):
     # download
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
-        print(r.headers)  # Debugging: Print headers to confirm
 
         # Get content length if available, otherwise use None
         content_length = r.headers.get('Content-Length')
@@ -53,7 +52,7 @@ def direct_download(url, path):
 
         if content_length is None:
             logger.debug(f'Response length not provided - download bar will not work.')
-            
+
         with open(path_temp, 'wb') as f:
             pbar = tqdm(unit="B", total=total_size, unit_scale=True, unit_divisor=1024, desc=f'Downloading: {path}')
             for chunk in r.iter_content(chunk_size=8192):
