@@ -3,8 +3,8 @@
 if __name__ == '__main__':
     import argparse
     import logging
-    from mtgdata.scryfall import _make_parser_scryfall_prepare, _run_scryfall_prepare
-    from mtgdata.scryfall_convert import _make_parser_scryfall_convert, _run_scryfall_convert
+    from mtgdata_cc.scryfall import _make_parser_scryfall_prepare, _run_scryfall_prepare
+    from mtgdata_cc.scryfall_convert import _make_parser_scryfall_convert, _run_scryfall_convert
 
     # initialise logging
     logging.basicConfig(level=logging.INFO)

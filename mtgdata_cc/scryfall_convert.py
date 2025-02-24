@@ -33,10 +33,10 @@ import h5py
 import numpy as np
 from tqdm import tqdm
 
-from mtgdata.scryfall import _data_dir
-from mtgdata.scryfall import ScryfallAPI
-from mtgdata.scryfall import ScryfallDataset
-from mtgdata.util import Hdf5Dataset
+from mtgdata_cc.scryfall import _data_dir
+from mtgdata_cc.scryfall import ScryfallAPI
+from mtgdata_cc.scryfall import ScryfallDataset
+from mtgdata_cc.util import Hdf5Dataset
 
 
 logger = logging.getLogger(__name__)
@@ -346,7 +346,7 @@ def _make_parser_scryfall_convert(parser=None):
         import argparse
         parser = argparse.ArgumentParser()
     # add arguments from scryfall.py
-    from mtgdata.scryfall import _make_parser_scryfall_prepare
+    from mtgdata_cc.scryfall import _make_parser_scryfall_prepare
     _make_parser_scryfall_prepare(parser)
     # extra args
     parser.add_argument('-o', '--out-root', type=str, default=None,         help="output folder")
