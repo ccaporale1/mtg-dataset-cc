@@ -37,35 +37,30 @@ logger = getLogger(__name__)
 # ========================================================================= #
 
 
-
-def get_default_cards_size(url="https://api.scryfall.com/bulk-data"):
-    response = requests.get(url)
-    response.raise_for_status()  # Ensure request is successful
-
-    data = response.json()
-    for entry in data.get("data", []):
-        if entry.get("type") == "default_cards":
-            return entry.get("size", None)  # Returns size or None if missing
-    
-    raise KeyError("No entry found for 'default_cards'")
-
 # TODO: merge with proxy
 def direct_download(url, path):
     # paths
     path_temp = path + '.dl'
-    
-    # Get file size from Scryfall API
-    file_size = get_default_cards_size(url)
 
     # download
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
+        print(r.headers)  # Debugging: Print headers to confirm
+
+        # Get content length if available, otherwise use None
+        content_length = r.headers.get('Content-Length')
+        total_size = int(content_length) if content_length else None  # None means unknown size
+
+        if content_length is None:
+            logger.debug(f'Response length not provided - download bar will not work.')
+            
         with open(path_temp, 'wb') as f:
-            pbar = tqdm(unit="B", total=file_size, unit_scale=True, unit_divisor=1024, desc=f'Downloading: {path}')
+            pbar = tqdm(unit="B", total=total_size, unit_scale=True, unit_divisor=1024, desc=f'Downloading: {path}')
             for chunk in r.iter_content(chunk_size=8192):
                 if chunk:
                     pbar.update(len(chunk))
                     f.write(chunk)
+
         # atomic
         os.rename(path_temp, path)
 
