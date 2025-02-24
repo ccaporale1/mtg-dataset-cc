@@ -32,4 +32,4 @@ jobs:
 
       - name: Verify installation
         run: |
-          python -c "import mtg_dataset; print('Installation successful')"
+          python -c "import mtgdata_cc; print('Installation successful')"
